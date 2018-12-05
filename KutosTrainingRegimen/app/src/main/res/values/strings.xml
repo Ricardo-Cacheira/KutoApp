@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Kuto\'s Training Regimen</string>
+    <string-array name="tips_array">
+        <item>If you get killed you die</item>
+        <item>When you take damage your health depletes</item>
+        <item>Attack enemies to kill them</item>
+        <item>If low on health use a potion</item>
+        <item>Dont step on mines</item>
+        <item>Avoid Ranged-Enemy Void Balls</item>
+        <item>Obvious Tip #756486458273642378</item>
+        <item>If you get killed you die</item>
+        <item>When you take damage your health depletes</item>
+        <item>Attack enemies to kill them</item>
+        <item>If low on health use a potion</item>
+        <item>Dont step on mines</item>
+        <item>Avoid Ranged-Enemy Void Balls</item>
+        <item>Obvious Tip #756486458273642378</item>
+        <item>If you get killed you die</item>
+        <item>When you take damage your health depletes</item>
+        <item>Attack enemies to kill them</item>
+        <item>If low on health use a potion</item>
+        <item>Dont step on mines</item>
+        <item>Avoid Ranged-Enemy Void Balls</item>
+        <item>Obvious Tip #756486458273642378</item>
+        <item>If you get killed you die</item>
+        <item>When you take damage your health depletes</item>
+        <item>Attack enemies to kill them</item>
+        <item>If low on health use a potion</item>
+        <item>Dont step on mines</item>
+        <item>Avoid Ranged-Enemy Void Balls</item>
+        <item>Obvious Tip #756486458273642378</item>
+    </string-array>
+
+    <integer-array name="enemy">
+        <item>@drawable/enemy0</item>
+        <item>@drawable/enemy1</item>
+        <item>@drawable/enemy2</item>
+        <item>@drawable/enemy3</item>
+        <item>@drawable/enemy4</item>
+    </integer-array>
+    <string name="title_activity_overview">Overview</string>
+    <string name="title_activity_game_screen">GameScreen</string>
+</resources>
