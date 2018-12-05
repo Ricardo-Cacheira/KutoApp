@@ -3,6 +3,8 @@ package com.example.user.kutostrainingregimen;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
@@ -25,6 +27,9 @@ public class Enemy {
 //    private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
     public int frameCounter = 0;
 
+    public String result="";
+    public boolean dodge = false;
+
     public int state = 0;
     public int side;
 
@@ -45,6 +50,7 @@ public class Enemy {
         State whichState = State.values()[state];
         switch (whichState) {
             case Idle:
+                result = "";
                 Random r = new Random();
                 side = r.nextInt(1 - 0 + 1) + 0;
                 if (frameCounter > 40)
@@ -69,10 +75,15 @@ public class Enemy {
                     }else{
                         image = right.get(2);
                     }
+                    dodge = getRandomBoolean();
                     frameCounter = 0;
                 }
                 break;
             case Jab:
+                if (dodge)
+                    result="DODGE !";
+                else
+                    result = "HIT !";
                 if (frameCounter > 20)
                 {
                     state = 0;
@@ -100,5 +111,20 @@ public class Enemy {
 
         canvas.drawBitmap(ring, src, dst,null);
         canvas.drawBitmap(image,w,h,null);
+
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(150);
+        int x;
+        if(result == "DODGE !")
+            x=250;
+        else
+            x=400;
+        canvas.drawText(result, x, 250, paint);
+    }
+
+    public static boolean getRandomBoolean() {
+        return Math.random() < 0.5;
+        //I tried another approaches here, still the same result
     }
 }

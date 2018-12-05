@@ -1,6 +1,8 @@
 package com.example.user.kutostrainingregimen;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.SurfaceHolder;
 
 public class MainThread extends Thread {
@@ -66,10 +68,14 @@ public class MainThread extends Thread {
                 synchronized(surfaceHolder) {
                     this.gameView.update();
                     this.gameView.draw(canvas);
+                    Paint paint = new Paint();
+                    paint.setColor(Color.WHITE);
+                    paint.setTextSize(20);
+                    canvas.drawText(Double.toString(averageFPS), 10, 25, paint);
                 }
             } catch (Exception e) {       }
             finally {
-                if (canvas != null)            {
+                if (canvas != null){
                     try {
                         surfaceHolder.unlockCanvasAndPost(canvas);
                     }
@@ -88,7 +94,7 @@ public class MainThread extends Thread {
 
             totalTime += System.nanoTime() - startTime;
             frameCount++;
-            if (frameCount == targetFPS)        {
+            if (frameCount == targetFPS){
                 averageFPS = 1000 / ((totalTime / frameCount) / 1000000);
                 frameCount = 0;
                 totalTime = 0;
