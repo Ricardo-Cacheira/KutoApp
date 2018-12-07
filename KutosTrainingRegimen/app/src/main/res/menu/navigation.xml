@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_overview"
+        android:icon="@drawable/ic_home"
+        android:title="@string/title_activity_overview" />
+
+    <item
+        android:id="@+id/navigation_walking"
+        android:icon="@drawable/ic_walk"
+        android:title="@string/title_walk" />
+
+    <item
+        android:id="@+id/navigation_game"
+        android:icon="@drawable/ic_game"
+        android:title="@string/title_activity_game_screen" />
+    <item
+        android:id="@+id/navigation_tips"
+        android:icon="@drawable/ic_tips"
+        android:title="@string/title_tips" />
+
+</menu>

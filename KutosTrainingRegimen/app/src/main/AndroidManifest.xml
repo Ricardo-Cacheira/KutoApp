@@ -11,13 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".Walking" />
 
         <meta-data
@@ -31,8 +25,19 @@
             android:label="@string/title_activity_overview"
             android:theme="@style/AppTheme" />
         <activity android:name=".Minigame" />
-        <activity android:name=".GameScreen"></activity>
-        <activity android:name=".Popup" android:theme="@style/AppTheme.Popup"></activity>
+        <activity android:name=".GameScreen" />
+        <activity
+            android:name=".Popup"
+            android:theme="@style/AppTheme.Popup" />
+        <activity
+            android:name=".TrainingRegimen"
+            android:label="@string/title_activity_training_regimen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
