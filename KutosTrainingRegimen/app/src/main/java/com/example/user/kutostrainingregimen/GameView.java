@@ -20,6 +20,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private Enemy enemy;
 
 
+
+
     public GameView(Context context)
     {
         super(context);
@@ -39,12 +41,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(SurfaceHolder holder) {
         ArrayList<Bitmap> right = new ArrayList<Bitmap>();
         right.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy0));
+        right.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
         right.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy3));
-        right.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy4));
+        right.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy5));
         ArrayList<Bitmap> left = new ArrayList<Bitmap>();
         left.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy0));
-        left.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy1));
         left.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy2));
+        left.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy4));
+        left.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy6));
 
         enemy = new Enemy(right,left,BitmapFactory.decodeResource(getResources(),R.drawable.ring));
 
@@ -78,8 +82,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         if (canvas != null)
         {
-
             enemy.draw(canvas);
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int x = (int)event.getX();
+        int y = (int)event.getY();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                enemy.Touch(x);
+        }
+        return false;
     }
 }

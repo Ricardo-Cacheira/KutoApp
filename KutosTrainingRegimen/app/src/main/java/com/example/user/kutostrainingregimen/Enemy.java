@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -29,9 +30,11 @@ public class Enemy {
 
     public String result="";
     public boolean dodge = false;
+    public boolean clicked = false;
 
     public int state = 0;
     public int side;
+    public int clickedSide;
 
 
     public Enemy(ArrayList<Bitmap> right, ArrayList<Bitmap> left,Bitmap ring) {
@@ -56,7 +59,7 @@ public class Enemy {
                 if (frameCounter > 40)
                 {
                     state = 1;
-                    if (side == 0) //0 left / 1 right
+                    if (side == 1) //0 left / 1 right
                     {
                         image = left.get(1);
                     }else{
@@ -66,28 +69,33 @@ public class Enemy {
                 }
                 break;
             case Charging:
+                if (clicked)
+                    dodge = (clickedSide==side);
+                else
+                    dodge = false;
+
+                Log.d("click", (clickedSide==side)+" cs:"+clickedSide+" s:"+side);
+
                 if (frameCounter > 30)
                 {
                     state = 2;
-                    if (side == 0) //0 left / 1 right
+                    int next = (dodge) ? 3 : 2;
+                    if (side == 1) //0 left / 1 right
                     {
-                        image = left.get(2);
+                        image = left.get(next);
                     }else{
-                        image = right.get(2);
+                        image = right.get(next);
                     }
-                    dodge = getRandomBoolean();
                     frameCounter = 0;
+                    clicked = false;
                 }
                 break;
             case Jab:
-                if (dodge)
-                    result="DODGE !";
-                else
-                    result = "HIT !";
+                    result= (dodge) ? "DODGE !" : "HIT !";
                 if (frameCounter > 20)
                 {
                     state = 0;
-                    if (side == 0) //0 left / 1 right
+                    if (side == 1) //0 left / 1 right
                     {
                         image = left.get(0);
                     }else{
@@ -125,6 +133,22 @@ public class Enemy {
 
     public static boolean getRandomBoolean() {
         return Math.random() < 0.5;
-        //I tried another approaches here, still the same result
+    }
+
+    public void Touch(int x)
+    {
+        if (!clicked) {
+            int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+            State whichState = State.values()[state];
+            if (whichState == State.Charging) {
+                clicked = true;
+                if (x >= screenWidth / 2) //right screen
+                {
+                    clickedSide = 1;
+                } else { //left screen
+                    clickedSide = 0;
+                }
+            }
+        }
     }
 }
