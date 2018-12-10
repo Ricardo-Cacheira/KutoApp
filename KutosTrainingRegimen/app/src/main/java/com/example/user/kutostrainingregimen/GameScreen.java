@@ -45,7 +45,9 @@ public class GameScreen extends Activity implements SensorEventListener {
             values[1]: acceleration in axis Y
             values[2]: acceleration in axis Z
          */
-        gameView.GetTilt(event.values[0], event.values[1]);
+
+        if (gameView.ready)
+            gameView.GetTilt(event.values[0], event.values[1]);
 
         if (gameView.over)
             this.onBackPressed();

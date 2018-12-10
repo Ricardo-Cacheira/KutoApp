@@ -22,6 +22,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     private MainThread thread;
     private Enemy enemy;
     public boolean over = false;
+    public boolean ready = false;
 
     public GameView(Context context)
     {
@@ -74,7 +75,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     public void update()
     {
-        enemy.update();
+        if (enemy.over)
+            over = true;
+
+        if(ready)
+            enemy.update();
     }
 
     @Override
@@ -82,33 +87,47 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     {
         super.draw(canvas);
 
-        if (enemy.over)
-            over = true;
-
         if (canvas != null)
         {
-            enemy.draw(canvas);
+            if (ready) {
+                enemy.draw(canvas);
 
-            Paint paint = new Paint();
-            paint.setColor(Color.WHITE);
-            paint.setTextSize(20);
-            canvas.drawText("Lives: "+ enemy.lives, canvas.getWidth() - 70, 25, paint);
+                Paint paint = new Paint();
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(20);
+                canvas.drawText("Lives: " + enemy.lives, canvas.getWidth() - 70, 25, paint);
+            }else
+            {
+                Paint paint = new Paint();
+                paint.setColor(Color.WHITE);
+                paint.setTextSize(200);
+                int x = (canvas.getWidth() / 2);
+                int y = (int) ((canvas.getHeight() / 2) - ((paint.descent() + paint.ascent()))) ;
+                canvas.drawText("Tap to Start",0,y, paint);
+            }
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        int x = (int)event.getX();
-        int y = (int)event.getY();
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                enemy.Touch(x);
+        if (ready)
+        {
+            int x = (int)event.getX();
+            int y = (int)event.getY();
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    enemy.Touch(x);
+            }
+        }else
+        {
+            ready = true;
         }
         return false;
     }
 
 
     public void GetTilt(float x, float y) {
-        enemy.Tilt(x,y);
+        if (ready)
+            enemy.Tilt(x,y);
     }
 }

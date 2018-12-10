@@ -109,9 +109,6 @@ public class Enemy{
                 break;
             case Jab:
                 result= (dodge) ? "DODGE !" : "HIT !";
-
-                if (lives <= 0) over = true;
-
                 if (frameCounter > 20)
                 {
                     if (!dodge) lives--;
@@ -124,6 +121,7 @@ public class Enemy{
                     }
                     frameCounter = 0;
                 }
+                if (lives <= 0) over = true;
                 break;
         }
     }
