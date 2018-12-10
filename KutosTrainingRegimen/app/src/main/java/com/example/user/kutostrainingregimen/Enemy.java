@@ -31,6 +31,9 @@ public class Enemy{
     private ArrayList<Bitmap> right;
     private Bitmap image;
     private Bitmap ring;
+
+    public int lives = 3;
+
 //    private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
 //    private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
     public int frameCounter = 0;
@@ -38,6 +41,9 @@ public class Enemy{
     public String result="";
     public boolean dodge = false;
     public boolean clicked = false;
+    public boolean over = false;
+
+    public int chargeFrames = 30;
 
     public int state = 0;
     public int side;
@@ -84,8 +90,11 @@ public class Enemy{
 
                 //Log.d("click", (clickedSide==side)+" cs:"+clickedSide+" s:"+side);
 
-                if (frameCounter > 30)
+                if (frameCounter > chargeFrames)
                 {
+                    if (chargeFrames >= 13)
+                        chargeFrames--;
+
                     state = 2;
                     int next = (dodge) ? 3 : 2;
                     if (side == 1) //0 left / 1 right
@@ -99,9 +108,13 @@ public class Enemy{
                 }
                 break;
             case Jab:
-                    result= (dodge) ? "DODGE !" : "HIT !";
+                result= (dodge) ? "DODGE !" : "HIT !";
+
+                if (lives <= 0) over = true;
+
                 if (frameCounter > 20)
                 {
+                    if (!dodge) lives--;
                     state = 0;
                     if (side == 1) //0 left / 1 right
                     {

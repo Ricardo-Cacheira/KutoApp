@@ -29,6 +29,7 @@
         <item>Dont step on mines</item>
         <item>Avoid Ranged-Enemy Void Balls</item>
         <item>Obvious Tip #756486458273642378</item>
+        <item> </item>
     </string-array>
 
     <integer-array name="enemy">

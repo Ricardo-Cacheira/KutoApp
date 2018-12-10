@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.PowerManager;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +21,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     private MainThread thread;
     private Enemy enemy;
-
+    public boolean over = false;
 
     public GameView(Context context)
     {
@@ -79,9 +81,18 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     public void draw(Canvas canvas)
     {
         super.draw(canvas);
+
+        if (enemy.over)
+            over = true;
+
         if (canvas != null)
         {
             enemy.draw(canvas);
+
+            Paint paint = new Paint();
+            paint.setColor(Color.WHITE);
+            paint.setTextSize(20);
+            canvas.drawText("Lives: "+ enemy.lives, canvas.getWidth() - 70, 25, paint);
         }
     }
 

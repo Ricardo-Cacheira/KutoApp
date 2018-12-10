@@ -71,7 +71,7 @@ public class MainThread extends Thread {
                     Paint paint = new Paint();
                     paint.setColor(Color.WHITE);
                     paint.setTextSize(20);
-                    canvas.drawText(Double.toString(averageFPS), 10, 25, paint);
+                    canvas.drawText("FPS: "+Double.toString(averageFPS), 10, 25, paint);
                 }
             } catch (Exception e) {       }
             finally {
