@@ -1,10 +1,11 @@
 package com.example.user.kutostrainingregimen;
 
 import android.content.Context;
-import android.content.Intent;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.os.PowerManager;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
@@ -14,12 +15,10 @@ import android.view.SurfaceHolder;
 
 import java.util.ArrayList;
 
-public class GameView extends SurfaceView implements SurfaceHolder.Callback {
+public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     private MainThread thread;
     private Enemy enemy;
-
-
 
 
     public GameView(Context context)
@@ -95,5 +94,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                 enemy.Touch(x);
         }
         return false;
+    }
+
+
+    public void GetTilt(float x, float y) {
+        enemy.Tilt(x,y);
     }
 }

@@ -1,36 +1,70 @@
 package com.example.user.kutostrainingregimen;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import android.content.pm.ActivityInfo;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class GameScreen extends Activity {
+public class GameScreen extends Activity implements SensorEventListener {
+
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+
+    public GameView gameView;
 
     Button homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(new GameView(this));
+        gameView = new GameView(this);
+        setContentView(gameView);
+    }
 
-//        homeButton = (Button) findViewById(R.id.backbtn);
-//
-//        homeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent (GameScreen.this, MainActivity.class);
-//                finish();
-//                startActivity(intent);
-//            }
-//        });
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        /*
+            values[0]: acceleration in axis X
+            values[1]: acceleration in axis Y
+            values[2]: acceleration in axis Z
+         */
+        gameView.GetTilt(event.values[0], event.values[1]);
+    }
 
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // register listener
+        // Frequency SENSOR_DELAY_GAME, second biggest. Try also SENSOR_DELAY_FASTEST, SENSOR_DELAY_NORMAL
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // delete listener
+        mSensorManager.unregisterListener(this);
     }
 }

@@ -18,7 +18,7 @@ public class Minigame extends RootActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_minigame);
 
-        back = (Button) findViewById(R.id.back);
+//        back = (Button) findViewById(R.id.back);
         help = (Button) findViewById(R.id.help);
 
         back.setOnClickListener(new View.OnClickListener()

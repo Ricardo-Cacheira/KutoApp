@@ -6,12 +6,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemy {
+public class Enemy{
 
     private enum State
     {
@@ -19,6 +23,9 @@ public class Enemy {
         Charging,
         Jab,
     }
+
+
+    public String TAG = "click";
 
     private ArrayList<Bitmap> left;
     private ArrayList<Bitmap> right;
@@ -49,6 +56,7 @@ public class Enemy {
     }
 
     public void update() {
+
         frameCounter++;
         State whichState = State.values()[state];
         switch (whichState) {
@@ -74,7 +82,7 @@ public class Enemy {
                 else
                     dodge = false;
 
-                Log.d("click", (clickedSide==side)+" cs:"+clickedSide+" s:"+side);
+                //Log.d("click", (clickedSide==side)+" cs:"+clickedSide+" s:"+side);
 
                 if (frameCounter > 30)
                 {
@@ -151,4 +159,42 @@ public class Enemy {
             }
         }
     }
+
+    public void Tilt(float x,float y)
+    {
+        if (Math.abs(x) > Math.abs(y)) {
+            State whichState = State.values()[state];
+            if (whichState == State.Charging) {
+                clicked = true;
+                if (x < 0) //right screen
+                {
+                    clickedSide = 1;
+                } else if (x > 0) { //left screen
+                    clickedSide = 0;
+                }
+            }
+        }
+        /*
+        if (Math.abs(x) > Math.abs(y)) {
+            if (x < 0) {
+                Log.d(TAG, "You tilt the device right");
+            }
+            if (x > 0) {
+                Log.d(TAG, "You tilt the device left");
+            }
+        } else {
+            if (y < 0) {
+                Log.d(TAG, "You tilt the device up");
+            }
+            if (y > 0) {
+                Log.d(TAG, "You tilt the device down");
+            }
+        }
+        if (x > (-2) && x < (2) && y > (-2) && y < (2)) {
+            Log.d(TAG, "Not tilt device");
+        }
+        */
+    }
+
+
 }

@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Overview">
 
-    <Button
-        android:id="@+id/back"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:background="@drawable/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"

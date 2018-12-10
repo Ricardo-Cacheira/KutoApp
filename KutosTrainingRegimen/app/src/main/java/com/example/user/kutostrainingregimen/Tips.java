@@ -22,7 +22,7 @@ public class Tips extends RootActivity implements AdapterView.OnItemClickListene
 
 
 
-        back = (Button) findViewById(R.id.back);
+//        back = (Button) findViewById(R.id.back);
 
         back.setOnClickListener(new View.OnClickListener()
         {

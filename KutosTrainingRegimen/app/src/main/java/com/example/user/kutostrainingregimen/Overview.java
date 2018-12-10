@@ -26,7 +26,7 @@ public class Overview extends RootActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
-        back = (Button) findViewById(R.id.back);
+//        back = (Button) findViewById(R.id.back);
 
         back.setOnClickListener(new View.OnClickListener()
         {

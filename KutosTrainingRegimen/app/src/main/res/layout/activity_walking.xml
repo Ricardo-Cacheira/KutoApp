@@ -4,25 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Walking"
-    android:background="#cecece">
-
-    <Button
-        android:id="@+id/back"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
-        android:background="@drawable/back"
-        android:src="@drawable/back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="#cecece"
+    tools:context=".Walking">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/travelTxt"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:background="#E5E2E2"
         android:gravity="center_vertical"
-        android:text="Long Travel"
+        android:text="Choose a travel distance"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -34,59 +25,74 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="0dp"
-        android:layout_height="328dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        android:layout_width="352dp"
+        android:layout_height="356dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/travelTxt">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/goalTxt"
             android:layout_width="0dp"
-            android:layout_height="38dp"
+            android:layout_height="56dp"
             android:background="#f2f2f2"
             android:gravity="center"
-            android:text="Steps taken"
+            android:text="Goal: 10,000 steps"
             android:textAlignment="center"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/percentSteps"
             android:layout_width="0dp"
-            android:layout_height="38dp"
+            android:layout_height="42dp"
+            android:layout_marginBottom="8dp"
             android:background="#b9b9b9"
             android:gravity="center"
-            android:text="You've completed 50% of the goal!"
+            android:text="You've completed 0% of the goal!"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/stopBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/circle_button"
+            android:text="Cancel"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#E0E0E0"
-            app:layout_constraintBottom_toTopOf="@+id/textView7"
+            app:layout_constraintBottom_toTopOf="@+id/percentSteps"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5">
+            app:layout_constraintTop_toBottomOf="@+id/goalTxt">
 
             <TextView
+                android:id="@+id/nSteps"
                 android:layout_width="133dp"
                 android:layout_height="133dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginBottom="48dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginBottom="36dp"
                 android:background="@drawable/circle_textview"
                 android:gravity="center"
-                android:text="5003 steps"
+                android:text="0 steps"
                 android:textAlignment="center"
                 android:textSize="34sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -102,52 +108,35 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout3"
-        android:layout_width="0dp"
-        android:layout_height="116dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintVertical_bias="0.401">
 
         <Button
-            android:id="@+id/button3"
-            android:layout_width="50dp"
+            android:id="@+id/startBtn"
+            android:layout_width="127dp"
             android:layout_height="50dp"
-            android:background="@drawable/circle_button"
-            android:text="Cancel"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="#f2f2f2"
-            android:gravity="center"
-            android:text="Time Remaining"
-            android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/textView9"
+            android:background="#ff700a"
+            android:text="Choose travel"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="0dp"
-            android:layout_height="81dp"
-            android:background="#E0E0E0"
-            android:gravity="center"
-            android:text="10h:56m:03s"
-            android:textAlignment="center"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
     </android.support.constraint.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
 
 </android.support.constraint.ConstraintLayout>
