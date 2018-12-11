@@ -23,10 +23,6 @@ public class Overview extends RootActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
-//        back = (Button) findViewById(R.id.back);
 
         back.setOnClickListener(new View.OnClickListener()
         {
@@ -46,15 +42,6 @@ public class Overview extends RootActivity {
 
         adapter = new ItemAdapter(inventory);
         this.inventory.setAdapter(adapter);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "You clicked this button", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     private ArrayList<Item> initInventory()

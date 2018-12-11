@@ -67,10 +67,21 @@ public class WalkingFragment extends Fragment implements SensorEventListener, St
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Walking completed";
+            String description = "some description";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel("1", name, importance);
+            channel.setDescription(description);
+            channel.setShowBadge(true);
+            notificationManager = getContext().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
         sensorManager = (SensorManager) getActivity().getSystemService(SENSOR_SERVICE);
         notificationManager = (NotificationManager) getContext().getSystemService(NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(getContext(), "1")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.walkingdownn)
                 .setContentTitle("Walking completed")
                 .setContentText("You just completed your walking challenge!")
                 .setVisibility(VISIBILITY_PUBLIC)
