@@ -2,6 +2,7 @@ package com.example.user.kutostrainingregimen;
 
 import android.content.Context;
 
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -17,18 +18,25 @@ import android.view.SurfaceHolder;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     private MainThread thread;
     private Enemy enemy;
     public boolean over = false;
     public boolean ready = false;
+    public int dodges = 0;
+
+    public SharedPreferences sharedPref;
 
     public GameView(Context context)
     {
         super(context);
 
         getHolder().addCallback(this);
+
+        sharedPref = getContext().getSharedPreferences("myPrefs" , MODE_PRIVATE);
 
         thread = new MainThread(getHolder(),this);
         setFocusable(true);
@@ -75,9 +83,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     public void update()
     {
-        if (enemy.over)
+        if (enemy.over) {
+            SaveScore();
             over = true;
-
+        }
         if(ready)
             enemy.update();
     }
@@ -129,5 +138,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     public void GetTilt(float x, float y) {
         if (ready)
             enemy.Tilt(x,y);
+    }
+
+    public void SaveScore()
+    {
+        dodges = enemy.dodges;
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("Last" , dodges);
+        if (dodges >= sharedPref.getInt("High",0))
+            editor.putInt("High" , dodges);
+        editor.commit();
+
     }
 }
