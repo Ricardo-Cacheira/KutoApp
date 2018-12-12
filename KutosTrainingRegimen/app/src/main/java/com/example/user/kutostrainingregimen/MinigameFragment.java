@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -19,8 +20,11 @@ public class MinigameFragment extends Fragment {
     public SharedPreferences sharedPref;
     Button playButton;
     private Button help;
+    private Button controls;
     private TextView highscore;
     private TextView lastScore;
+
+    public boolean motion;
 
 
     @Nullable
@@ -31,7 +35,10 @@ public class MinigameFragment extends Fragment {
 
         sharedPref = getContext().getSharedPreferences("myPrefs" , MODE_PRIVATE);
 
+        motion = sharedPref.getBoolean("Motion",true);
+
         help = (Button) rootView.findViewById(R.id.help);
+        controls = (Button) rootView.findViewById(R.id.controls);
         highscore = (TextView) rootView.findViewById(R.id.highscore);
         lastScore = (TextView) rootView.findViewById(R.id.lastScore);
 
@@ -40,6 +47,20 @@ public class MinigameFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), Popup.class));
+            }
+        });
+
+        controls.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                motion = !motion;
+                Toast.makeText(getContext(), ((motion) ? "Controls = Motion":"Controls = Touch"),
+                        Toast.LENGTH_SHORT).show();
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("Motion" , motion);
+                editor.commit();
             }
         });
 

@@ -26,6 +26,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
     private Enemy enemy;
     public boolean over = false;
     public boolean ready = false;
+    public boolean motion;
     public int dodges = 0;
 
     public SharedPreferences sharedPref;
@@ -61,6 +62,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
         left.add(BitmapFactory.decodeResource(getResources(),R.drawable.enemy6));
 
         enemy = new Enemy(right,left,BitmapFactory.decodeResource(getResources(),R.drawable.ring));
+
+        motion = sharedPref.getBoolean("Motion",true);
 
         thread.setRunning(true);
         thread.start();
@@ -119,7 +122,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback{
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (ready)
+        if (ready && !motion)
         {
             int x = (int)event.getX();
             int y = (int)event.getY();

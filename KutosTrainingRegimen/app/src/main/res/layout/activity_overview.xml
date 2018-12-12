@@ -6,6 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".Overview">
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="103dp"
+            android:layout_height="66dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/shakebtn"
+            android:layout_width="40dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="8dp"
+            android:background="#00D73D22"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shaker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--<fragment-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/fragmente">-->
+    <!--</fragment>-->
+        <TextView
+            android:id="@+id/nShakes"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="9dp"
+            android:background="@drawable/circle_textvieworange"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
@@ -72,24 +123,35 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Level: 9001"
-        android:textSize="30sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dailyTxt" />
 
+    <Button
+        android:id="@+id/Accept"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#00ED6212"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/dailyTxt"
+        app:layout_constraintEnd_toEndOf="@+id/timer"
+        app:layout_constraintStart_toStartOf="@+id/timer"
+        app:layout_constraintTop_toTopOf="@+id/timer" />
+
     <TextView
         android:id="@+id/timer"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         android:text="Accept daily"
         android:textSize="30sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
     <TextView
         android:id="@+id/dailyTxt"
@@ -102,17 +164,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timer" />
-
-    <Button
-        android:id="@+id/Accept"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/circle_button"
-        android:text="Accept"
-        app:layout_constraintStart_toEndOf="@+id/dailyTxt"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/inventory"
