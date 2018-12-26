@@ -1,6 +1,7 @@
 package com.example.user.kutostrainingregimen;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -15,12 +16,15 @@ import android.widget.Button;
 
 public class GameScreen extends Activity implements SensorEventListener {
 
+    public SharedPreferences sharedPref;
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
 
     public GameView gameView;
 
     Button homeButton;
+
+    public boolean motion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,10 @@ public class GameScreen extends Activity implements SensorEventListener {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
+        sharedPref = getSharedPreferences("myPrefs" , MODE_PRIVATE);
+
+        motion = sharedPref.getBoolean("Motion",true);
+
         gameView = new GameView(this);
         setContentView(gameView);
     }
@@ -46,11 +54,13 @@ public class GameScreen extends Activity implements SensorEventListener {
             values[2]: acceleration in axis Z
          */
 
-        if (gameView.ready)
+        if (gameView.ready && motion)
             gameView.GetTilt(event.values[0], event.values[1]);
 
         if (gameView.over)
+        {
             this.onBackPressed();
+        }
     }
 
     @Override

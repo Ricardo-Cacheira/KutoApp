@@ -11,8 +11,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -37,8 +36,9 @@ public class OverviewFragment extends Fragment {
     private static final String TIME_LEFT_LONG = "timeLeftMillis";
     private static final String TIME_END_LONG = "timeEndMillis";
     private static final String TIME_RUNNING_BOOL = "timerRunning";
+    private static final String SHAKE_COUNTER_INT = "shakeCounter";
 
-    private TextView timer, nextDailyTxt;
+    private TextView timer, nextDailyTxt, nOfShakesTxt;
     private Button acceptDaily;
     private long timeLeftMillis = START_TIME;
     private boolean timerRunning;
@@ -51,10 +51,13 @@ public class OverviewFragment extends Fragment {
     public NotificationCompat.Builder mBuilder;
     public SensorManager sensorManager;
 
+    private ImageButton shakeBtn;
+
+    public static int nOfShakes;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "Daily mission";
             String description = "You have a new daily mission available!";
@@ -100,6 +103,11 @@ public class OverviewFragment extends Fragment {
         adapter = new ItemAdapter(inventory);
         this.inventory.setAdapter(adapter);
 
+        shakeBtn = (ImageButton) rootView.findViewById(R.id.shakebtn);
+        nOfShakesTxt = (TextView) rootView.findViewById(R.id.nShakes);
+
+        nOfShakesTxt.setText(""+ nOfShakes);
+
         acceptDaily.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +115,16 @@ public class OverviewFragment extends Fragment {
                 timerRunning = true;
                 nextDailyTxt.setVisibility(View.VISIBLE);
                 StartTimer();
+            }
+        });
+
+        shakeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nOfShakes > 0) {
+                    Intent intent = new Intent(getActivity(), ShakeActivity.class);
+                    getActivity().startActivity(intent);
+                }
             }
         });
 
@@ -130,12 +148,20 @@ public class OverviewFragment extends Fragment {
                 nextDailyTxt.setVisibility(View.INVISIBLE);
                 timerRunning = false;
                 timer.setText("Accept daily");
+                nOfShakes++;
+                nOfShakesTxt.setText("" + nOfShakes);
 
                 notificationManager.notify(001, mBuilder.build());
             }
         }.start();
 
         acceptDaily.setVisibility(View.INVISIBLE);
+    }
+
+    public void UpdateShakes()
+    {
+        nOfShakes++;
+        nOfShakesTxt.setText("" + nOfShakes);
     }
 
     private void UpdateCountdownText()
@@ -156,6 +182,11 @@ public class OverviewFragment extends Fragment {
 
         timeLeftMillis = prefs.getLong(TIME_LEFT_LONG, START_TIME);
         timerRunning = prefs.getBoolean(TIME_RUNNING_BOOL, false);
+        nOfShakes = prefs.getInt(SHAKE_COUNTER_INT, 0);
+
+        nOfShakes = (ShakeActivity.shakesLeft - nOfShakes) + nOfShakes;
+        nOfShakes += WalkingFragment.nShakes;
+        WalkingFragment.nShakes = 0;
 
         if(timerRunning)
         {
@@ -166,6 +197,7 @@ public class OverviewFragment extends Fragment {
             if(timeLeftMillis < 0) {
                 timeLeftMillis = 0;
                 timer.setText("Accept daily");
+                nOfShakes++;
 
                 timerRunning = false;
             } else
@@ -174,6 +206,7 @@ public class OverviewFragment extends Fragment {
                 nextDailyTxt.setVisibility(View.VISIBLE);
             }
         }
+        nOfShakesTxt.setText("" + nOfShakes);
     }
 
     @Override
@@ -186,6 +219,7 @@ public class OverviewFragment extends Fragment {
         editor.putLong(TIME_LEFT_LONG, timeLeftMillis);
         editor.putBoolean(TIME_RUNNING_BOOL, timerRunning);
         editor.putLong(TIME_END_LONG, timeEnd);
+        editor.putInt(SHAKE_COUNTER_INT, nOfShakes);
 
         editor.apply();
     }

@@ -62,6 +62,7 @@ public class WalkingFragment extends Fragment implements SensorEventListener, St
     public NotificationManager notificationManager;
     public NotificationCompat.Builder mBuilder;
 
+    public static int nShakes=0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,8 +93,6 @@ public class WalkingFragment extends Fragment implements SensorEventListener, St
 //                .setContentIntent(pendingIntent)
                 .setDefaults(Notification.DEFAULT_VIBRATE)
                 .setAutoCancel(true);
-
-
     }
 
     @Nullable
@@ -105,6 +104,7 @@ public class WalkingFragment extends Fragment implements SensorEventListener, St
         accel = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         simpleStepDetector = new StepDetector();
         simpleStepDetector.registerListener(this);
+        nShakes = 0;
 
         TvSteps = (TextView) rootView.findViewById(R.id.nSteps);
         TvPercent = (TextView) rootView.findViewById(R.id.percentSteps);
@@ -170,12 +170,9 @@ public class WalkingFragment extends Fragment implements SensorEventListener, St
                 else
                     TvPercent.setText("You've completed " + formattedValue + "% of your goal!");
 
-                popupWindow.showAsDropDown(rootView, Gravity.CENTER, 0, 0);
-
-
+                popupWindow.showAtLocation(rootView, Gravity.CENTER, 0, 0);
             }
         });
-
 
         BtnStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,7 +226,7 @@ public class WalkingFragment extends Fragment implements SensorEventListener, St
             TvSteps.setText(goalSteps + TEXT_NUM_STEPS);
             TvPercent.setText("You've completed your goal!");
             sensorManager.unregisterListener(WalkingFragment.this);
-
+            nShakes++;
             notificationManager.notify(001, mBuilder.build());
         }
     }

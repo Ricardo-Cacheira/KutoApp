@@ -1,5 +1,6 @@
 package com.example.user.kutostrainingregimen;
 
+import android.content.SharedPreferences;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,18 +10,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MinigameFragment extends Fragment {
 
+    public SharedPreferences sharedPref;
     Button playButton;
     private Button help;
+    private Button controls;
+    private TextView highscore;
+    private TextView lastScore;
+
+    public boolean motion;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.activity_minigame, container, false);
 
+        sharedPref = getContext().getSharedPreferences("myPrefs" , MODE_PRIVATE);
+
+        motion = sharedPref.getBoolean("Motion",true);
+
         help = (Button) rootView.findViewById(R.id.help);
+        controls = (Button) rootView.findViewById(R.id.controls);
+        highscore = (TextView) rootView.findViewById(R.id.highscore);
+        lastScore = (TextView) rootView.findViewById(R.id.lastScore);
 
         help.setOnClickListener(new View.OnClickListener()
         {
@@ -29,6 +49,22 @@ public class MinigameFragment extends Fragment {
                 startActivity(new Intent(getContext(), Popup.class));
             }
         });
+
+        controls.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                motion = !motion;
+                Toast.makeText(getContext(), ((motion) ? "Controls = Motion":"Controls = Touch"),
+                        Toast.LENGTH_SHORT).show();
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("Motion" , motion);
+                editor.commit();
+            }
+        });
+
+        LoadHighscore();
 
         playButton = (Button) rootView.findViewById(R.id.playbtn);
 
@@ -42,5 +78,21 @@ public class MinigameFragment extends Fragment {
 
 
         return rootView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LoadHighscore();
+    }
+
+
+    public void LoadHighscore()
+    {
+        int score = sharedPref.getInt("High",0);
+        int last = sharedPref.getInt("Last",0);
+
+        highscore.setText("HighScore: " + score);
+        lastScore.setText("Last Score: " + last);
     }
 }

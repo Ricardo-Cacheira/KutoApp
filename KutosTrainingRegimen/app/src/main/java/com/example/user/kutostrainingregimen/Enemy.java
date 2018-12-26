@@ -46,6 +46,7 @@ public class Enemy{
     public int chargeFrames = 30;
 
     public int state = 0;
+    public int dodges = 0;
     public int side;
     public int clickedSide;
 
@@ -112,6 +113,8 @@ public class Enemy{
                 if (frameCounter > 20)
                 {
                     if (!dodge) lives--;
+                    else dodges++;
+
                     state = 0;
                     if (side == 1) //0 left / 1 right
                     {
