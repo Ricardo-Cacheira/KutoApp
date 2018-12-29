@@ -70,9 +70,11 @@ public class Enemy{
             case Idle:
                 result = "";
                 Random r = new Random();
-                side = r.nextInt(1 - 0 + 1) + 0;
                 if (frameCounter > 40)
                 {
+                    //r.nextInt((max - min) + 1) + min;
+                    side = r.nextInt((1 - 0) + 1) + 0;
+                    Log.d(TAG,side+"side");
                     state = 1;
                     if (side == 1) //0 left / 1 right
                     {
@@ -171,6 +173,7 @@ public class Enemy{
                     clickedSide = 0;
                 }
             }
+            Log.d(TAG,clickedSide+"clickedside");
         }
     }
 
