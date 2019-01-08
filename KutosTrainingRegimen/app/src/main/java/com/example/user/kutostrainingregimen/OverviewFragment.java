@@ -206,10 +206,7 @@ public class OverviewFragment extends Fragment {
         nOfShakes += WalkingFragment.nShakes;
         WalkingFragment.nShakes = 0;
 
-        gold.setText("Gold: "+ ((TrainingRegimen)getActivity()).getGold());
-        shards.setText("Shards: "+ ((TrainingRegimen)getActivity()).getShards());
-        vitality.setText("Vitality: " +((TrainingRegimen)getActivity()).getVitality());
-        lvl.setText("Level : " + ((TrainingRegimen)getActivity()).getLvl());
+        UpdateValues();
 
         if(timerRunning)
         {
@@ -262,4 +259,13 @@ public class OverviewFragment extends Fragment {
 
         return list;
     }
+
+    public void UpdateValues()
+    {
+        gold.setText("Gold: "+ ((TrainingRegimen)getActivity()).getGold());
+        shards.setText("Shards: "+ ((TrainingRegimen)getActivity()).getShards());
+        vitality.setText("Vitality: " +((TrainingRegimen)getActivity()).getVitality());
+        lvl.setText("Level : " + ((TrainingRegimen)getActivity()).getLvl());
+    }
+
 }
