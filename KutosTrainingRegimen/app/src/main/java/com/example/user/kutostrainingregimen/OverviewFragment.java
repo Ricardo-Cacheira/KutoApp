@@ -32,6 +32,7 @@ import static android.content.Context.SENSOR_SERVICE;
 
 public class OverviewFragment extends Fragment {
 
+    public TrainingRegimen trainingRegimen;
     private static final long START_TIME = 20000;
     private static final String TIME_LEFT_LONG = "timeLeftMillis";
     private static final String TIME_END_LONG = "timeEndMillis";
@@ -39,6 +40,8 @@ public class OverviewFragment extends Fragment {
     private static final String SHAKE_COUNTER_INT = "shakeCounter";
 
     private TextView timer, nextDailyTxt, nOfShakesTxt;
+
+    private TextView gold, shards, lvl, vitality;
     private Button acceptDaily;
     private long timeLeftMillis = START_TIME;
     private boolean timerRunning;
@@ -91,17 +94,26 @@ public class OverviewFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.activity_overview, container, false);
 
+        trainingRegimen = (TrainingRegimen) this.getActivity();
+
         ArrayList<Item> inventory = initInventory();
         timer = (TextView) rootView.findViewById(R.id.timer);
         nextDailyTxt = (TextView) rootView.findViewById(R.id.dailyTxt);
         acceptDaily = (Button) rootView.findViewById(R.id.Accept);
 
-        this.inventory = (RecyclerView) rootView.findViewById(R.id.inventory);
-        RecyclerView.LayoutManager mLayoutManager =  new LinearLayoutManager(getContext());
-        this.inventory.setLayoutManager(mLayoutManager);
 
-        adapter = new ItemAdapter(inventory);
-        this.inventory.setAdapter(adapter);
+        gold = (TextView) rootView.findViewById(R.id.gold);
+        shards = (TextView) rootView.findViewById(R.id.shards);
+        vitality = (TextView) rootView.findViewById(R.id.vitality);
+        lvl = (TextView) rootView.findViewById(R.id.level);
+
+
+//        this.inventory = (RecyclerView) rootView.findViewById(R.id.inventory);
+//        RecyclerView.LayoutManager mLayoutManager =  new LinearLayoutManager(getContext());
+//        this.inventory.setLayoutManager(mLayoutManager);
+//
+//        adapter = new ItemAdapter(inventory);
+//        this.inventory.setAdapter(adapter);
 
         shakeBtn = (ImageButton) rootView.findViewById(R.id.shakebtn);
         nOfShakesTxt = (TextView) rootView.findViewById(R.id.nShakes);
@@ -123,6 +135,12 @@ public class OverviewFragment extends Fragment {
             public void onClick(View v) {
                 if (nOfShakes > 0) {
                     Intent intent = new Intent(getActivity(), ShakeActivity.class);
+                    intent.putExtra("ip", ((TrainingRegimen)getActivity()).ip);
+                    intent.putExtra("name",((TrainingRegimen)getActivity()).name);
+                    intent.putExtra("pass",((TrainingRegimen)getActivity()).pass);
+                    intent.putExtra("gold",((TrainingRegimen)getActivity()).getGold());
+                    intent.putExtra("shards",((TrainingRegimen)getActivity()).getShards());
+                    intent.putExtra("json", ((TrainingRegimen)getActivity()).data.toString());
                     getActivity().startActivity(intent);
                 }
             }
@@ -187,6 +205,11 @@ public class OverviewFragment extends Fragment {
         nOfShakes = (ShakeActivity.shakesLeft - nOfShakes) + nOfShakes;
         nOfShakes += WalkingFragment.nShakes;
         WalkingFragment.nShakes = 0;
+
+        gold.setText("Gold: "+ ((TrainingRegimen)getActivity()).getGold());
+        shards.setText("Shards: "+ ((TrainingRegimen)getActivity()).getShards());
+        vitality.setText("Vitality: " +((TrainingRegimen)getActivity()).getVitality());
+        lvl.setText("Level : " + ((TrainingRegimen)getActivity()).getLvl());
 
         if(timerRunning)
         {

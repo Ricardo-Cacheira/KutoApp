@@ -36,12 +36,12 @@ public class Overview extends RootActivity {
 
         ArrayList<Item> inventory = initInventory();
 
-        this.inventory = (RecyclerView) findViewById(R.id.inventory);
-        RecyclerView.LayoutManager mLayoutManager =  new LinearLayoutManager(this);
-        this.inventory.setLayoutManager(mLayoutManager);
+        //this.inventory = (RecyclerView) findViewById(R.id.inventory);
+        //RecyclerView.LayoutManager mLayoutManager =  new LinearLayoutManager(this);
+        //this.inventory.setLayoutManager(mLayoutManager);
 
-        adapter = new ItemAdapter(inventory);
-        this.inventory.setAdapter(adapter);
+        //adapter = new ItemAdapter(inventory);
+        //this.inventory.setAdapter(adapter);
     }
 
     private ArrayList<Item> initInventory()

@@ -3,7 +3,6 @@
     package="com.example.user.kutostrainingregimen">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -14,7 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
-        <activity android:name=".Walking" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -34,13 +32,14 @@
         <activity
             android:name=".TrainingRegimen"
             android:label="@string/title_activity_training_regimen">
+        </activity>
+        <activity android:name=".ShakeActivity" />
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ShakeActivity"></activity>
     </application>
 
 </manifest>
