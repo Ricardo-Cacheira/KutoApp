@@ -31,11 +31,12 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 public class ShakeActivity extends AppCompatActivity {
 
-    JSONObject data;
-    int gold, shards;
+    JSONObject data = new JSONObject();
+    int gold, shards, lvl;
     private ShakeListener mShaker;
     private Button backButton;
     private boolean hasShaked;
@@ -95,8 +96,13 @@ public class ShakeActivity extends AppCompatActivity {
     }
 
     private void getReward() {
-        gold += 3;
-        shards += 3;
+        Random r = new Random();
+        int range = r.nextInt((lvl+2) - (lvl-10)) + (lvl-10);
+        if (range <= 0)
+            range = 1;
+
+        gold += 150 * range;
+        shards += 5* range;
         try {
             data.put("gold", gold);
             data.put("shards", shards);
@@ -163,6 +169,8 @@ public class ShakeActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
             int aJsonInt = 0;
             int coins = 0;
 
@@ -178,19 +186,6 @@ public class ShakeActivity extends AppCompatActivity {
             catch(Exception e){
 
             }
-
-
-            // set data response to textView
-
-            // mResult.setText("status: " + necromancyData.getCoins()+" ok: " + coins);
-
-            //if(progressDialog != null)
-            //{
-            //progressDialog.dismiss();
-            //}
-
-            super.onPostExecute(result);
-
         }
 
         private String postData(String urlPath) throws IOException, JSONException {

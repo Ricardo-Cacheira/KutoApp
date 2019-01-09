@@ -48,7 +48,7 @@ public class TrainingRegimen extends AppCompatActivity {
     String name;
     String pass;
 
-    JSONObject data;
+    JSONObject data = new JSONObject();
 
     public int gold=1, shards=0, vitality=0, lvl=0;
 
@@ -191,6 +191,13 @@ public class TrainingRegimen extends AppCompatActivity {
             mFragmentList.add(fragment);
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        new GetDataTask().execute("http://"+ip+":8080/api/getData?username="+name+"&password="+pass);
     }
 
     class GetDataTask extends AsyncTask<String, Void, String>
