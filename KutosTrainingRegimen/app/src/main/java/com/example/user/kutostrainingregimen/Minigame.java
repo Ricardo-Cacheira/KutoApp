@@ -19,7 +19,7 @@ public class Minigame extends RootActivity {
         setContentView(R.layout.activity_minigame);
 
 //        back = (Button) findViewById(R.id.back);
-        help = (Button) findViewById(R.id.help);
+//        help = (Button) findViewById(R.id.help);
 
         back.setOnClickListener(new View.OnClickListener()
         {
@@ -31,13 +31,13 @@ public class Minigame extends RootActivity {
             }
         });
 
-        help.setOnClickListener(new View.OnClickListener()
+ /*       help.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Minigame.this, Popup.class));
             }
-        });
+        });*/
 
         playButton = (Button) findViewById(R.id.playbtn);
 

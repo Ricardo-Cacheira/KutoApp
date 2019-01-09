@@ -238,8 +238,6 @@ public class TrainingRegimen extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-
             int aJsonInt = 0;
             int coins = 0;
 
@@ -268,7 +266,7 @@ public class TrainingRegimen extends AppCompatActivity {
 
             }
 
-            overviewFragment.UpdateValues();
+
             // set data response to textView
 
             // mResult.setText("status: " + necromancyData.getCoins()+" ok: " + coins);
@@ -278,6 +276,7 @@ public class TrainingRegimen extends AppCompatActivity {
 //                progressDialog.dismiss();
 //            }
 
+            super.onPostExecute(result);
 
         }
 

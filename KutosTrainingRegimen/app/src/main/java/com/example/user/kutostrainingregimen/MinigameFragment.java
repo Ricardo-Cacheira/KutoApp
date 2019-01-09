@@ -20,7 +20,7 @@ public class MinigameFragment extends Fragment {
     public SharedPreferences sharedPref;
     Button playButton;
     private Button help;
-    private Button controls;
+    private Button controlsMotion, controlsTouch;
     private TextView highscore;
     private TextView lastScore;
 
@@ -35,27 +35,42 @@ public class MinigameFragment extends Fragment {
 
         sharedPref = getContext().getSharedPreferences("myPrefs" , MODE_PRIVATE);
 
-        motion = sharedPref.getBoolean("Motion",true);
+ //       motion = sharedPref.getBoolean("Motion",true);
 
-        help = (Button) rootView.findViewById(R.id.help);
-        controls = (Button) rootView.findViewById(R.id.controls);
+//        help = (Button) rootView.findViewById(R.id.help);
+        controlsMotion = (Button) rootView.findViewById(R.id.motion);
+        controlsTouch = (Button) rootView.findViewById(R.id.touch);
         highscore = (TextView) rootView.findViewById(R.id.highscore);
         lastScore = (TextView) rootView.findViewById(R.id.lastScore);
 
-        help.setOnClickListener(new View.OnClickListener()
+ /*       help.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), Popup.class));
             }
-        });
+        });*/
 
-        controls.setOnClickListener(new View.OnClickListener()
+        controlsMotion.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                motion = !motion;
-                Toast.makeText(getContext(), ((motion) ? "Controls = Motion":"Controls = Touch"),
+                motion = true;
+                Toast.makeText(getContext(), ("Controls = Motion"),
+                        Toast.LENGTH_SHORT).show();
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("Motion" , motion);
+                editor.commit();
+            }
+        });
+
+        controlsTouch.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                motion = false;
+                Toast.makeText(getContext(), ("Controls = Touch"),
                         Toast.LENGTH_SHORT).show();
 
                 SharedPreferences.Editor editor = sharedPref.edit();

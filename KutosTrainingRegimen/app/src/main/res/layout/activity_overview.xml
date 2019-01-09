@@ -4,21 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Overview">
+    tools:context=".Overview"
+    android:background="@drawable/appbackground">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout4"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="98dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="103dp"
-            android:layout_height="66dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="134dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,10 +40,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <!--<fragment-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/fragmente">-->
-    <!--</fragment>-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/fragmente">-->
+        <!--</fragment>-->
         <TextView
             android:id="@+id/nShakes"
             android:layout_width="20dp"
@@ -52,6 +54,7 @@
             android:gravity="center"
             android:text="0"
             android:textSize="10sp"
+            android:textColor="#ffffff"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -77,7 +80,7 @@
         layout="@layout/content_overview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
@@ -85,18 +88,26 @@
     <TextView
         android:id="@+id/shards"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="Strenght: 50"
+        android:layout_height="34dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto"
+        android:text="Shards: 0"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vitality" />
+        app:layout_constraintTop_toBottomOf="@+id/gold" />
 
     <TextView
         android:id="@+id/vitality"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
         android:text="Vitality: 350"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,47 +117,75 @@
         android:id="@+id/gold"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="Gold: 50000"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Gold: 5030"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shards" />
+        app:layout_constraintTop_toBottomOf="@+id/vitality" />
 
     <TextView
         android:id="@+id/level"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="Level: 9001"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto"
+        android:text="Level: 0"
+        android:textAlignment="center"
+        android:textColor="#3abfc2"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dailyTxt" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="170dp"
+        android:layout_height="35dp"
+        android:layout_margin="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/circle_button_edges"
+        android:gravity="center"
+        android:paddingHorizontal="7dp"
+        android:paddingVertical="3dp"
+        android:text="ACCEPT DAILY"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view"
+        tools:text="ACCEPT DAILY" />
 
     <Button
         android:id="@+id/Accept"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#00ED6212"
+        android:background="@android:color/transparent"
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/dailyTxt"
         app:layout_constraintEnd_toEndOf="@+id/timer"
         app:layout_constraintStart_toStartOf="@+id/timer"
         app:layout_constraintTop_toTopOf="@+id/timer" />
 
-    <TextView
-        android:id="@+id/timer"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:text="Accept daily"
-        android:textSize="30sp"
-        android:textStyle="bold"
+    <View
+        android:id="@+id/view"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginEnd="46dp"
+        android:background="#c0c0c0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/shards" />
 
     <TextView
         android:id="@+id/dailyTxt"
@@ -154,23 +193,28 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/roboto"
         android:text="Until next daily"
+        android:textColor="#ffffff"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/include"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timer" />
+        app:layout_constraintTop_toBottomOf="@+id/timer"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="112dp"
-        android:layout_height="106dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="196dp"
-        android:src="@mipmap/ic_launcher_foreground"
-        app:layout_constraintEnd_toStartOf="@+id/level"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:layout_width="149dp"
+        android:layout_height="203dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/kutodraw"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
     <!--<TextView-->
         <!--android:id="@+id/textView4"-->
