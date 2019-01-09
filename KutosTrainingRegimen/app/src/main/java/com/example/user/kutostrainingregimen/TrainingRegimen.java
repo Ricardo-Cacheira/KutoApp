@@ -245,6 +245,8 @@ public class TrainingRegimen extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
             int aJsonInt = 0;
             int coins = 0;
 
@@ -263,6 +265,8 @@ public class TrainingRegimen extends AppCompatActivity {
                 gold = dataObj.getInt("gold");
                 shards = dataObj.getInt("shards");
                 vitality = dataObj.getInt("vitality");
+
+                overviewFragment.UpdateValues();
                 Log.d("mongo","gold "+gold);
                 Log.d("mongo","shards "+shards);
                 Log.d("mongo","vit "+vitality);
@@ -272,18 +276,6 @@ public class TrainingRegimen extends AppCompatActivity {
             catch(Exception e){
 
             }
-
-
-            // set data response to textView
-
-            // mResult.setText("status: " + necromancyData.getCoins()+" ok: " + coins);
-
-//            if(progressDialog != null)
-//            {
-//                progressDialog.dismiss();
-//            }
-
-            super.onPostExecute(result);
 
         }
 
